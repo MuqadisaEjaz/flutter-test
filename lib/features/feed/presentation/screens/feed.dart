@@ -33,18 +33,59 @@ class FeedScreen extends ConsumerWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
                 children: [
-                  _buildFeedTab("Public Feed", feedType == FeedType.public, () {
-                    ref.read(feedTypeProvider.notifier).state = FeedType.public;
-                  }),
-                  SizedBox(width: 32.w),
-                  _buildFeedTab("Business Feed", feedType == FeedType.business,
-                      () {
-                    ref.read(feedTypeProvider.notifier).state =
-                        FeedType.business;
-                  }),
+                  // Green underliner
+                  Positioned(
+                    bottom: 0,
+                    left: feedType == FeedType.public
+                        ? 0
+                        : MediaQuery.of(context).size.width / 2,
+                    child: Container(
+                      height: 2.h,
+                      width: MediaQuery.of(context).size.width / 2,
+                      color: Colors.green,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: _buildFeedTab(
+                            "Public Feed", feedType == FeedType.public, () {
+                          ref.read(feedTypeProvider.notifier).state =
+                              FeedType.public;
+                        }),
+                      ),
+                      Expanded(
+                        child: _buildFeedTab(
+                            "Business Feed", feedType == FeedType.business, () {
+                          ref.read(feedTypeProvider.notifier).state =
+                              FeedType.business;
+                        }),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Feeds',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Nunito',
+                    ),
+                  ),
+                  IconButton(
+                    icon: Image.asset('assets/filter.png'),
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),
@@ -63,19 +104,19 @@ class FeedScreen extends ConsumerWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, '/');
                 break;
               case 1:
-                Navigator.pushNamed(context, '/search');
+                // Navigator.pushNamed(context, '/search');
                 break;
               case 2:
-                Navigator.pushNamed(context, '/create');
+                Navigator.pushNamed(context, '/create-post');
                 break;
               case 3:
                 Navigator.pushNamed(context, '/chat');
                 break;
               case 4:
-                Navigator.pushNamed(context, '/profile');
+                //  Navigator.pushNamed(context, '/profile');
                 break;
             }
           },
@@ -87,24 +128,18 @@ class FeedScreen extends ConsumerWidget {
   Widget _buildFeedTab(String text, bool isSelected, VoidCallback onTap) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 16.sp,
-              color: isSelected ? Colors.black : Colors.grey,
-              fontWeight: FontWeight.bold,
-            ),
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(bottom: 10.h),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 16.sp,
+            color: isSelected ? Colors.black : Colors.grey,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Nunito',
           ),
-          if (isSelected)
-            Container(
-              margin: EdgeInsets.only(top: 4.h),
-              height: 2.h,
-              width: text.length * 8.w,
-              color: Colors.green,
-            ),
-        ],
+        ),
       ),
     );
   }

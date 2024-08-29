@@ -6,7 +6,7 @@ class Post {
   final bool isVerified;
   final String timeAgo;
   final String content;
-  final String postImageUrl;
+  final String? postImageUrl;
 
   Post({
     required this.id,
@@ -16,6 +16,6 @@ class Post {
     required this.isVerified,
     required this.timeAgo,
     required this.content,
-    required this.postImageUrl,
+    this.postImageUrl,
   });
 }

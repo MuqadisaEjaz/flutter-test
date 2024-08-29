@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test/features/chat/model/chat-model.dart';
+import 'package:test/features/chat/presenatation/screens/message-box.dart';
 
 class ChatInboxScreen extends StatelessWidget {
   final Chat chat;
@@ -34,43 +35,47 @@ class ChatInboxScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-                decoration: BoxDecoration(
-                    color: Color(0xFF364960),
-                    borderRadius: BorderRadius.circular(20.r)),
-                child: Text(
-                  'Today',
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
           Expanded(
             child: ListView(
               padding: EdgeInsets.all(16.w),
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.h),
+                  child: Center(
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+                      decoration: BoxDecoration(
+                          color: Color(0xFF364960),
+                          borderRadius: BorderRadius.circular(20.r)),
+                      child: Text(
+                        'Today',
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CircleAvatar(
                         backgroundImage: AssetImage(chat.userImage),
                         radius: 20.r,
                       ),
                       SizedBox(width: 8.w),
-                      ChatMessageBox(
-                        messageType: MessageType.text,
-                        messageContent: "Hey, how's it going?",
-                        time: "12:00 PM",
-                        isSentByUser: false,
+                      Expanded(
+                        child: ChatMessageBox(
+                          messageType: MessageType.text,
+                          messageContent:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nunc eget aliquet dignissim, neque sapien tincidunt eros, sit amet dapibus nulla enim ac nisi",
+                          time: "12:00 PM",
+                          isSentByUser: false,
+                        ),
                       ),
                     ],
                   ),
@@ -80,13 +85,16 @@ class ChatInboxScreen extends StatelessWidget {
                   alignment: Alignment.centerRight,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      ChatMessageBox(
-                        messageType: MessageType.text,
-                        messageContent: "All good! How about you?",
-                        time: "12:01 PM",
-                        isSentByUser: true,
+                      Expanded(
+                        child: ChatMessageBox(
+                          messageType: MessageType.text,
+                          messageContent:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Integer euismod, nunc eget aliquet dignissim, neque sapien tincidunt eros, sit amet dapibus nulla enim ac nisi",
+                          time: "12:01 PM",
+                          isSentByUser: true,
+                        ),
                       ),
                       SizedBox(width: 8.w),
                       CircleAvatar(
@@ -100,18 +108,20 @@ class ChatInboxScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CircleAvatar(
                         backgroundImage: AssetImage(chat.userImage),
                         radius: 20.r,
                       ),
                       SizedBox(width: 8.w),
-                      ChatMessageBox(
-                        messageType: MessageType.image,
-                        messageContent: "assets/Frame.png",
-                        time: "12:05 PM",
-                        isSentByUser: false,
+                      Expanded(
+                        child: ChatMessageBox(
+                          messageType: MessageType.image,
+                          messageContent: "assets/Frame.png",
+                          time: "12:05 PM",
+                          isSentByUser: false,
+                        ),
                       ),
                     ],
                   ),
@@ -131,10 +141,7 @@ class ChatInboxScreen extends StatelessWidget {
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: "Type a message",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20.r),
-                        borderSide: BorderSide.none,
-                      ),
+                      border: InputBorder.none,
                       filled: true,
                       contentPadding: EdgeInsets.symmetric(
                         vertical: 10.h,
@@ -150,60 +157,6 @@ class ChatInboxScreen extends StatelessWidget {
                   },
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-enum MessageType { text, image }
-
-class ChatMessageBox extends StatelessWidget {
-  final MessageType messageType;
-  final String messageContent;
-  final String time;
-  final bool isSentByUser;
-
-  const ChatMessageBox({
-    required this.messageType,
-    required this.messageContent,
-    required this.time,
-    required this.isSentByUser,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xFFECF3F6),
-        borderRadius: BorderRadius.circular(12.r),
-      ),
-      padding: EdgeInsets.all(12.w),
-      constraints: BoxConstraints(maxWidth: 250.w),
-      child: Column(
-        crossAxisAlignment:
-            isSentByUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: [
-          if (messageType == MessageType.text)
-            Text(
-              messageContent,
-              style: TextStyle(fontSize: 14.sp),
-            ),
-          if (messageType == MessageType.image)
-            Image.asset(
-              messageContent,
-              width: 200.w,
-              height: 150.h,
-              fit: BoxFit.cover,
-            ),
-          SizedBox(height: 4.h),
-          Text(
-            time,
-            style: TextStyle(
-              fontSize: 12.sp,
-              color: Colors.grey,
             ),
           ),
         ],

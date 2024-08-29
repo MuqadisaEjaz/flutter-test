@@ -18,7 +18,10 @@ class ChatScreen extends ConsumerWidget {
           elevation: 0,
           title: Text(
             'Message',
-            style: TextStyle(color: Colors.black, fontSize: 18.sp),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.bold),
           ),
           actions: [
             Padding(
@@ -42,19 +45,19 @@ class ChatScreen extends ConsumerWidget {
           onTap: (index) {
             switch (index) {
               case 0:
-                Navigator.pushNamed(context, '/home');
+                Navigator.pushNamed(context, '/');
                 break;
               case 1:
-                Navigator.pushNamed(context, '/search');
+                // Navigator.pushNamed(context, '/search');
                 break;
               case 2:
-                Navigator.pushNamed(context, '/create');
+                Navigator.pushNamed(context, '/create-post');
                 break;
               case 3:
                 Navigator.pushNamed(context, '/chat');
                 break;
               case 4:
-                Navigator.pushNamed(context, '/profile');
+                //  Navigator.pushNamed(context, '/profile');
                 break;
             }
           },

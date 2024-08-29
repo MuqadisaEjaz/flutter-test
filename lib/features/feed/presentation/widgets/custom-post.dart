@@ -13,6 +13,7 @@ class PostCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(16.w),
       child: Card(
+        color: Color(0xFFECF3F6),
         child: Padding(
           padding: EdgeInsets.all(16.w),
           child: Column(
@@ -35,7 +36,31 @@ class PostCard extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(post.name, style: TextStyle(fontSize: 16.sp)),
+                          Row(
+                            children: [
+                              Text(
+                                post.name,
+                                style: TextStyle(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              if (post.isVerified)
+                                Padding(
+                                  padding: EdgeInsets.only(left: 5.w),
+                                  child: Image.asset(
+                                    'assets/verify.png',
+                                    width: 16.w,
+                                    height: 16.h,
+                                  ),
+                                ),
+                              Text(
+                                post.timeAgo,
+                                style: TextStyle(
+                                    fontSize: 12.sp, color: Colors.grey),
+                              ),
+                            ],
+                          ),
                           GestureDetector(
                             onTap: () {
                               showModalBottomSheet(
@@ -46,7 +71,7 @@ class PostCard extends StatelessWidget {
                                 builder: (BuildContext context) {
                                   return Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.25, // Set height to a quarter of screen size
+                                        0.25,
                                     child: TopicBottomSheet(),
                                   );
                                 },
@@ -60,20 +85,10 @@ class PostCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      if (post.isVerified)
-                        Padding(
-                          padding: EdgeInsets.only(left: 5.w),
-                          child: Image.asset('assets/verify.png',
-                              width: 16.w, height: 16.h),
-                        ),
                     ],
                   ),
                   Row(
                     children: [
-                      Text(post.timeAgo,
-                          style:
-                              TextStyle(fontSize: 12.sp, color: Colors.grey)),
-                      SizedBox(width: 10.w),
                       Image.asset('assets/more.png', width: 20.w, height: 20.h),
                     ],
                   ),
@@ -85,7 +100,7 @@ class PostCard extends StatelessWidget {
                 style: TextStyle(fontSize: 14.sp),
               ),
               SizedBox(height: 10.h),
-              Image.asset(post.postImageUrl),
+              if (post.postImageUrl != null) Image.asset(post.postImageUrl!),
               SizedBox(height: 10.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -101,7 +116,8 @@ class PostCard extends StatelessWidget {
                           width: 24.w, height: 24.h),
                     ],
                   ),
-                  Image.asset('assets/save.png', width: 24.w, height: 24.h),
+                  if (post.postImageUrl != null)
+                    Image.asset('assets/save.png', width: 24.w, height: 24.h),
                 ],
               ),
             ],

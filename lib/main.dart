@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test/features/chat/presenatation/screens/chat.dart';
+import 'package:test/routes/app-routes.dart';
 
 void main() {
   runApp(
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: ChatScreen(),
+          onGenerateRoute: AppRoutes.generateRoute,
         );
       },
     );
