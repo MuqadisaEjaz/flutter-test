@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:test/features/create-post/provider/create-post-provider.dart';
 
 class CreatePostScreen extends ConsumerWidget {
@@ -15,7 +16,7 @@ class CreatePostScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: IconButton(
             icon: Image.asset('assets/back.png'),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => context.pop(),
           ),
           title: Text('Create Post'),
           actions: [

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:test/features/chat/model/chat-model.dart';
-import 'package:test/features/chat/presenatation/screens/chat-inbox.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatCard extends StatelessWidget {
   final Chat chat;
@@ -12,11 +12,7 @@ class ChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => ChatInboxScreen(chat: chat),
-          ),
-        );
+        GoRouter.of(context).push('/message/${chat.userName}');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),

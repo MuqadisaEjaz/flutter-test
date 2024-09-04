@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:test/routes/app-routes.dart';
+import 'package:test/routes/app_routes.dart';
 
 void main() {
   runApp(
@@ -18,12 +18,12 @@ class MyApp extends StatelessWidget {
       designSize: Size(375, 812),
       minTextAdapt: true,
       builder: (context, child) {
-        return MaterialApp(
+        return MaterialApp.router(
           title: 'Social Media App',
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          onGenerateRoute: AppRoutes.generateRoute,
+          routerConfig: AppRoutes().router,
         );
       },
     );

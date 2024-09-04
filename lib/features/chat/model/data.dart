@@ -10,7 +10,7 @@ class DummyChatData {
           timeAgo: '2 mins ago',
           numberOfMessage: '5'),
       Chat(
-          userName: 'Bruno Pham',
+          userName: 'Bruno Pham1',
           userImage: 'assets/Avatar-2.png',
           lastMessage: 'Hello, I really like your post about...',
           timeAgo: '2 mins ago',

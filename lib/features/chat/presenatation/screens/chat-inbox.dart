@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:test/features/chat/model/chat-model.dart';
 import 'package:test/features/chat/presenatation/screens/message-box.dart';
 
 class ChatInboxScreen extends StatelessWidget {
-  final Chat chat;
+  final String userName;
 
-  const ChatInboxScreen({required this.chat});
+  const ChatInboxScreen({required this.userName});
 
   @override
   Widget build(BuildContext context) {
+    final Chat chat = Chat(
+        userName: userName,
+        userImage: 'assets/Avatar.png',
+        lastMessage: 'Hello, I really like your post about...',
+        timeAgo: '2 mins ago',
+        numberOfMessage: '5');
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Image.asset('assets/back.png'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => context.pop(),
         ),
         title: Text(
           chat.userName,
