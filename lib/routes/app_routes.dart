@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:test/features/chat/presenatation/screens/chat-inbox.dart';
 import 'package:test/features/chat/presenatation/screens/chat.dart';
-
 import 'package:test/features/create-post/presentation/screens/create-post.dart';
 import 'package:test/features/feed/presentation/screens/feed.dart';
 import 'package:test/routes/navbar_navigation.dart';
@@ -27,6 +26,10 @@ class AppRoutes {
                   child: FeedScreen(),
                 ),
               ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
               GoRoute(
                 path: '/chat',
                 pageBuilder: (context, state) => MaterialPage(
@@ -38,21 +41,17 @@ class AppRoutes {
         ],
       ),
       GoRoute(
+        path: '/create-post',
+        pageBuilder: (context, state) => MaterialPage(
+          child: CreatePostScreen(),
+        ),
+      ),
+      GoRoute(
         path: '/message/:userName',
         pageBuilder: (context, state) {
           final userName = state.pathParameters['userName']!;
           return MaterialPage(
-            child: ChatInboxScreen(
-              userName: userName,
-            ),
-          );
-        },
-      ),
-      GoRoute(
-        path: '/create-post',
-        pageBuilder: (context, state) {
-          return MaterialPage(
-            child: CreatePostScreen(),
+            child: ChatInboxScreen(userName: userName),
           );
         },
       ),

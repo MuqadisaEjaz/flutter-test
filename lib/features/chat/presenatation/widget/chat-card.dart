@@ -12,7 +12,7 @@ class ChatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push('/message/${chat.userName}');
+        GoRouter.of(context).go('/message/${chat.userName}');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),

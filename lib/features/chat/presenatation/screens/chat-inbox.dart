@@ -22,7 +22,7 @@ class ChatInboxScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Image.asset('assets/back.png'),
-          onPressed: () => context.pop(),
+          onPressed: () => context.go('/chat'),
         ),
         title: Text(
           chat.userName,

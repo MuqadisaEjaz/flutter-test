@@ -16,7 +16,7 @@ class CreatePostScreen extends ConsumerWidget {
         appBar: AppBar(
           leading: IconButton(
             icon: Image.asset('assets/back.png'),
-            onPressed: () => context.pop(),
+            onPressed: () => context.go('/'),
           ),
           title: Text('Create Post'),
           actions: [

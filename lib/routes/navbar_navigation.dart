@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:test/shared/widgets/navbar.dart';
 
 class NavigationShell extends StatelessWidget {
   final Widget navigationShell;
   final String currentLocation;
 
-  NavigationShell(
-      {required this.navigationShell, required this.currentLocation});
+  NavigationShell({
+    required this.navigationShell,
+    required this.currentLocation,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +29,15 @@ class NavigationShell extends StatelessWidget {
     void _onNavBarTap(int index) {
       switch (index) {
         case 0:
-          context.push('/');
+          context.go('/');
           break;
         case 1:
           break;
         case 2:
-          context.push('/create-post');
+          context.go('/create-post');
           break;
         case 3:
-          context.push('/chat');
+          context.go('/chat');
           break;
         case 4:
           break;
